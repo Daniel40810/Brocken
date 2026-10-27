@@ -1,0 +1,20 @@
+# Brocken · .gitignore (Phase 1)
+# NetBeans: Ausgaben und rechnerbezogene Einstellungen
+/build/
+/dist/
+/lib/Avatar.jar
+/nbproject/private/
+/daten/
+/docs/
+/templates/
+# Vorlagen und Rohdaten (GLO-30, DGM200, DGM1, DOP20, Nationalpark, Heightmap): groß, Lizenz beim Anbieter
+/templates/
+# Zugangsdaten: USER.sql enthält das Passwort des Schemas im Klartext, db.properties die Verbindung
+db/USER.sql
+db/db.properties
+# Laufzeit der App
+/daten/fehler.txt
+# Phase 17: Speicher ohne Datenbank (Sitzungen, Chronik, Eigenes, Protokoll); „Übernehmen“ trägt ihn in die Datenbank
+/daten/sitzungen/
+/daten/zeilen/
+/daten/protokoll.txt

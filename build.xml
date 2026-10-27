@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- You may freely edit this file. See commented blocks below for -->
+<!-- some examples of how to customize the build. -->
+<!-- (If you delete it and reopen the project it will be recreated.) -->
+<!-- By default, only the Clean and Build commands use this build script. -->
+<!-- Commands such as Run, Debug, and Test only use this build script if -->
+<!-- the Compile on Save feature is turned off for the project. -->
+<!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
+<!-- in the project's Project Properties dialog box.-->
+<project name="Brocken" default="default" basedir=".">
+    <description>Builds, tests, and runs the project Brocken.</description>
+    <import file="nbproject/build-impl.xml"/>
+    <!--
+
+    There exist several targets which are by default empty and which can be 
+    used for execution of your tasks. These targets are usually executed 
+    before and after some main targets. They are: 
+
+      -pre-init:                 called before initialization of project properties
+      -post-init:                called after initialization of project properties
+      -pre-compile:              called before javac compilation
+      -post-compile:             called after javac compilation
+      -pre-compile-single:       called before javac compilation of single file
+      -post-compile-single:      called after javac compilation of single file
+      -pre-compile-test:         called before javac compilation of JUnit tests
+      -post-compile-test:        called after javac compilation of JUnit tests
+      -pre-compile-test-single:  called before javac compilation of single JUnit test
+      -post-compile-test-single: called after javac compilation of single JUunit test
+      -pre-jar:                  called before JAR building
+      -post-jar:                 called after JAR building
+      -post-clean:               called after cleaning build products
+
+    (Targets beginning with '-' are not intended to be called on their own.)
+
+    Example of inserting an obfuscator after compilation could look like this:
+
+        <target name="-post-compile">
+            <obfuscate>
+                <fileset dir="${build.classes.dir}"/>
+            </obfuscate>
+        </target>
+
+    For list of available properties check the imported 
+    nbproject/build-impl.xml file. 
+
+
+    Another way to customize the build is by overriding existing main targets.
+    The targets of interest are: 
+
+      -init-macrodef-javac:     defines macro for javac compilation
+      -init-macrodef-junit:     defines macro for junit execution
+      -init-macrodef-debug:     defines macro for class debugging
+      -init-macrodef-java:      defines macro for class execution
+      -do-jar:                  JAR building
+      run:                      execution of project 
+      -javadoc-build:           Javadoc generation
+      test-report:              JUnit report generation
+
+    An example of overriding the target for project execution could look like this:
+
+        <target name="run" depends="Brocken-impl.jar">
+            <exec dir="bin" executable="launcher.exe">
+                <arg file="${dist.jar}"/>
+            </exec>
+        </target>
+
+    Notice that the overridden target depends on the jar target and not only on 
+    the compile target as the regular run target does. Again, for a list of available 
+    properties which you can use, check the target you are overriding in the
+    nbproject/build-impl.xml file. 
+
+    -->
+    <!--
+        Phase 1 (F4 A, aus Geiranger): Prüfung von lib/Renderer.jar. Die Element-Packages liegen nicht im Projekt: ihre
+        Quelle ist das Projekt Renderer (dort übersetzt tools/PaketPruefung.java jedes Package einzeln). Hier prüft
+        tools/JarPruefung.java nach jedem Übersetzen, ob lib/Renderer.jar alles hat, was Brocken braucht (jedes Package mit
+        Klassen und README, Java 21, die Shader von wind, rime, rail und wetglass); abschalten mit -Dohne.paketpruefung=true.
+    -->
+    <target name="check-packages" description="Prüft lib/Renderer.jar: alle gebrauchten Packages mit README, Java 21, Shader der neuen Packages." unless="ohne.paketpruefung">
+        <property name="platform.java" value="java"/>
+        <exec executable="${platform.java}" dir="${basedir}" failonerror="true">
+            <arg value="-Dstdout.encoding=UTF-8"/>
+            <arg value="-Dstderr.encoding=UTF-8"/>
+            <arg value="tools/JarPruefung.java"/>
+            <arg value="lib/Renderer.jar"/>
+        </exec>
+    </target>
+    <target name="-post-compile" depends="check-packages"/>
+
+    <!-- Phase 1: Prüfprogramm der App ohne Grafikkarte und Datenbank (endet mit "ERGEBNIS: alles in Ordnung"). -->
+    <target name="pruefung" depends="compile-test" description="Startet die Prüfung com.dan.brocken.test.Pruefung.">
+        <property name="platform.java" value="java"/>
+        <java classname="com.dan.brocken.test.Pruefung" fork="true" jvm="${platform.java}" dir="${basedir}" failonerror="true">
+            <jvmarg value="-Dstdout.encoding=UTF-8"/>
+            <jvmarg value="-Djava.awt.headless=true"/>
+            <jvmarg value="-Xmx4g"/>
+            <classpath><pathelement path="${run.test.classpath}"/></classpath>
+        </java>
+    </target>
+
+    <!-- Phase 17: Prüfung gegen die echte Datenbank (db/db.properties, Schema BROCKEN auf PDBORCL). Richtet ein, schreibt eine
+         Chronik, stellt „Weiter wie zuletzt“ her und räumt auf; endet mit "Alles in Ordnung.". -->
+    <target name="dbpruefung" depends="compile-test" description="Phase 17: com.dan.brocken.test.DbPruefung gegen Oracle.">
+        <property name="platform.java" value="java"/>
+        <java classname="com.dan.brocken.test.DbPruefung" fork="true" jvm="${platform.java}" dir="${basedir}" failonerror="true">
+            <jvmarg value="-Dstdout.encoding=UTF-8"/>
+            <jvmarg value="-Djava.awt.headless=true"/>
+            <jvmarg value="-Xmx4g"/>
+            <classpath><pathelement path="${run.test.classpath}"/></classpath>
+        </java>
+    </target>
+
+    <!-- Phase 17: db/sql/04_startdaten.sql aus dem Code erzeugen (Quellen, Befunde, Gelände, Höhenlinien, Strecke, Fahrplan,
+         Bauten, Regiebücher, Presets …). Nach Änderungen an Szene, Fahrplan, Klima oder Presets laufen lassen; die
+         Prüfung meldet, wenn die Datei nicht mehr zum Code passt. -->
+    <target name="startdaten" depends="compile" description="Phase 17: tools.StartdatenSql schreibt db/sql/04_startdaten.sql.">
+        <property name="platform.java" value="java"/>
+        <java classname="com.dan.brocken.tools.StartdatenSql" fork="true" jvm="${platform.java}" dir="${basedir}" failonerror="true">
+            <jvmarg value="-Dstdout.encoding=UTF-8"/>
+            <jvmarg value="-Djava.awt.headless=true"/>
+            <jvmarg value="-Xmx3g"/>
+            <classpath><pathelement path="${run.classpath}"/></classpath>
+        </java>
+    </target>
+
+    <!-- Phase 18: das Programmsymbol als Dateien: src/com/dan/brocken/ui/icon/brocken_NN.png (ins Jar) und Brocken.ico für die
+         Verknüpfung (Brocken_Verknuepfung.bat). -->
+    <target name="symbol" depends="compile" description="Phase 18: tools.Symbol schreibt Brocken.ico und die PNGs des Symbols.">
+        <property name="platform.java" value="java"/>
+        <java classname="com.dan.brocken.tools.Symbol" fork="true" jvm="${platform.java}" dir="${basedir}" failonerror="true">
+            <jvmarg value="-Dstdout.encoding=UTF-8"/>
+            <jvmarg value="-Djava.awt.headless=true"/>
+            <classpath><pathelement path="${run.classpath}"/></classpath>
+        </java>
+    </target>
+
+    <!-- Phase 18: docs/QUELLEN.md aus src/com/dan/brocken/data/quellen.txt und befunde.txt (dieselben Zeilen wie BR_QUELLE und BR_BEFUND). -->
+    <target name="quellen" depends="compile" description="Phase 18: tools.Quellenliste schreibt docs/QUELLEN.md.">
+        <property name="platform.java" value="java"/>
+        <java classname="com.dan.brocken.tools.Quellenliste" fork="true" jvm="${platform.java}" dir="${basedir}" failonerror="true">
+            <jvmarg value="-Dstdout.encoding=UTF-8"/>
+            <jvmarg value="-Djava.awt.headless=true"/>
+            <classpath><pathelement path="${run.classpath}"/></classpath>
+        </java>
+    </target>
+
+    <!-- Phase 18: die Prüfklassen aller Packages in lib/Renderer.jar (auch die der Vorgänger: fracture, ocean, tide …), jede im
+         eigenen Prozess; Bericht docs/status/Vorgaenger_Phase18.txt. -->
+    <target name="vorgaenger" depends="compile" description="Phase 18: tools.Vorgaenger lässt alle Prüfklassen in Renderer.jar laufen.">
+        <property name="platform.java" value="java"/>
+        <java classname="com.dan.brocken.tools.Vorgaenger" fork="true" jvm="${platform.java}" dir="${basedir}" failonerror="true">
+            <jvmarg value="-Dstdout.encoding=UTF-8"/>
+            <jvmarg value="-Djava.awt.headless=true"/>
+            <arg line="lib/Renderer.jar"/>
+            <classpath><pathelement path="${run.classpath}"/></classpath>
+        </java>
+    </target>
+
+    <!-- Phase 18: die vier Qualitätsstufen auf der Grafikkarte, je ein Bild vom Vogelauge über dem Nebelmeer mit vollem HUD
+         (docs/status/Stufe_Niedrig.png … Stufe_Ultra.png); die Zeiten stehen im HUD und in der Ausgabe. Auf der Radeon. -->
+    <target name="stufen" depends="jar" description="Phase 18: die vier Qualitätsstufen messen (docs/status/Stufe_*.png).">
+        <property name="platform.java" value="java"/>
+        <java classname="com.dan.brocken.tools.Tempo" fork="true" jvm="${platform.java}" dir="${basedir}" failonerror="true">
+            <jvmarg value="-Dstdout.encoding=UTF-8"/>
+            <jvmarg value="--enable-native-access=ALL-UNNAMED"/>
+            <jvmarg value="-Xmx3g"/>
+            <jvmarg value="-Dansicht=Vogelauge"/>
+            <jvmarg value="-Dhud=voll"/>
+            <jvmarg value="-Dwetter=UeberdemNebelmeer"/>
+            <jvmarg value="-Dregiestunde=2"/>
+            <arg line="120 1920 1080 docs/status/Stufe_Niedrig.png NIEDRIG 9 2026-10-21"/>
+            <classpath><pathelement path="${run.classpath}"/></classpath>
+        </java>
+        <java classname="com.dan.brocken.tools.Tempo" fork="true" jvm="${platform.java}" dir="${basedir}" failonerror="true">
+            <jvmarg value="-Dstdout.encoding=UTF-8"/>
+            <jvmarg value="--enable-native-access=ALL-UNNAMED"/>
+            <jvmarg value="-Xmx3g"/>
+            <jvmarg value="-Dansicht=Vogelauge"/>
+            <jvmarg value="-Dhud=voll"/>
+            <jvmarg value="-Dwetter=UeberdemNebelmeer"/>
+            <jvmarg value="-Dregiestunde=2"/>
+            <arg line="120 1920 1080 docs/status/Stufe_Mittel.png MITTEL 9 2026-10-21"/>
+            <classpath><pathelement path="${run.classpath}"/></classpath>
+        </java>
+        <java classname="com.dan.brocken.tools.Tempo" fork="true" jvm="${platform.java}" dir="${basedir}" failonerror="true">
+            <jvmarg value="-Dstdout.encoding=UTF-8"/>
+            <jvmarg value="--enable-native-access=ALL-UNNAMED"/>
+            <jvmarg value="-Xmx3g"/>
+            <jvmarg value="-Dansicht=Vogelauge"/>
+            <jvmarg value="-Dhud=voll"/>
+            <jvmarg value="-Dwetter=UeberdemNebelmeer"/>
+            <jvmarg value="-Dregiestunde=2"/>
+            <arg line="120 1920 1080 docs/status/Stufe_Hoch.png HOCH 9 2026-10-21"/>
+            <classpath><pathelement path="${run.classpath}"/></classpath>
+        </java>
+        <java classname="com.dan.brocken.tools.Tempo" fork="true" jvm="${platform.java}" dir="${basedir}" failonerror="true">
+            <jvmarg value="-Dstdout.encoding=UTF-8"/>
+            <jvmarg value="--enable-native-access=ALL-UNNAMED"/>
+            <jvmarg value="-Xmx3g"/>
+            <jvmarg value="-Dansicht=Vogelauge"/>
+            <jvmarg value="-Dhud=voll"/>
+            <jvmarg value="-Dwetter=UeberdemNebelmeer"/>
+            <jvmarg value="-Dregiestunde=2"/>
+            <arg line="120 1920 1080 docs/status/Stufe_Ultra.png ULTRA 9 2026-10-21"/>
+            <classpath><pathelement path="${run.classpath}"/></classpath>
+        </java>
+    </target>
+
+    <!-- Phase 2: ALKIS-Auszug (Python 3, nur Standardbibliothek) aus templates/alkis_kreis_15085.gpkg nach daten/alkis/*.bin.
+         Nur nötig, wenn sich das Geopaket ändert; daten/alkis liegt schon im Projekt. -->
+    <target name="alkis" description="Phase 2: tools/alkis_auszug.py schreibt daten/alkis/nutzung.bin und gebaeude.bin.">
+        <exec executable="python" dir="${basedir}" failonerror="true">
+            <arg value="tools/alkis_auszug.py"/>
+        </exec>
+    </target>
+
+    <!-- Phase 2: Import des Geländes aus templates/ (GLO-30, DGM200, DGM1 wenn in templates/dgm1) und daten/alkis nach
+         daten/gelaende, dazu das Statusbild docs/status/Gelaende_Import.png. Nach neuen DGM1-Kacheln erneut laufen lassen. -->
+    <target name="gelaende" depends="compile" description="Phase 2: tools.GelaendeImport schreibt daten/gelaende und docs/status/Gelaende_Import.png.">
+        <property name="platform.java" value="java"/>
+        <java classname="com.dan.brocken.tools.GelaendeImport" fork="true" jvm="${platform.java}" dir="${basedir}" failonerror="true">
+            <jvmarg value="-Dstdout.encoding=UTF-8"/>
+            <jvmarg value="-Djava.awt.headless=true"/>
+            <jvmarg value="-Xmx3g"/>
+            <classpath><pathelement path="${run.classpath}"/></classpath>
+        </java>
+    </target>
+
+    <!-- Phase 18: das Vogelauge über dem Nebelmeer wie bisher (Vergleich der Zeit), ohne Hilfslinien (Marken, Pfeile, Rauchfäden;
+         -Dmarken=an, -Dpfeile=an, -Dfaeden=an zeigen sie). Auf der Radeon laufen lassen. -->
+    <target name="tempo" depends="jar" description="Phase 18: docs/status/Status_Phase18.png (Vogelauge über dem Nebelmeer, volles HUD).">
+        <property name="platform.java" value="java"/>
+        <java classname="com.dan.brocken.tools.Tempo" fork="true" jvm="${platform.java}" dir="${basedir}" failonerror="true">
+            <jvmarg value="-Dstdout.encoding=UTF-8"/>
+            <jvmarg value="--enable-native-access=ALL-UNNAMED"/>
+            <jvmarg value="-Xmx3g"/>
+            <jvmarg value="-Dansicht=Vogelauge"/>
+            <jvmarg value="-Dhud=voll"/>
+            <jvmarg value="-Dwetter=UeberdemNebelmeer"/>
+            <jvmarg value="-Dregiestunde=2"/>
+            <arg line="120 1920 1080 docs/status/Status_Phase18.png MITTEL 9 2026-10-21"/>
+            <classpath><pathelement path="${run.classpath}"/></classpath>
+        </java>
+    </target>
+
+    <!-- Phase 16: die vier Regiebücher laufen in Schritten zu 0,2 s durch, zu jedem Foto wird ein Bild gezeichnet, am Ende
+         steht ein Blatt docs/status/Regiebuch_….png. Auf der Radeon laufen lassen. -->
+    <target name="regieblaetter" depends="jar" description="Phase 16: die Blätter der vier Regiebücher (docs/status/Regiebuch_*.png).">
+        <property name="platform.java" value="java"/>
+        <java classname="com.dan.brocken.tools.Tempo" fork="true" jvm="${platform.java}" dir="${basedir}" failonerror="true">
+            <jvmarg value="-Dstdout.encoding=UTF-8"/>
+            <jvmarg value="--enable-native-access=ALL-UNNAMED"/>
+            <jvmarg value="-Xmx3g"/>
+            <jvmarg value="-Dregie=Zug"/>
+            <jvmarg value="-Dmarken=aus"/>
+            <jvmarg value="-Dpfeile=aus"/>
+            <jvmarg value="-Dfaeden=aus"/>
+            <arg line="20 1920 1080 - MITTEL 9 2026-10-21"/>
+            <classpath><pathelement path="${run.classpath}"/></classpath>
+        </java>
+        <java classname="com.dan.brocken.tools.Tempo" fork="true" jvm="${platform.java}" dir="${basedir}" failonerror="true">
+            <jvmarg value="-Dstdout.encoding=UTF-8"/>
+            <jvmarg value="--enable-native-access=ALL-UNNAMED"/>
+            <jvmarg value="-Xmx3g"/>
+            <jvmarg value="-Dregie=Nebelmeer"/>
+            <jvmarg value="-Dmarken=aus"/>
+            <jvmarg value="-Dpfeile=aus"/>
+            <jvmarg value="-Dfaeden=aus"/>
+            <arg line="20 1920 1080 - MITTEL 9 2026-10-21"/>
+            <classpath><pathelement path="${run.classpath}"/></classpath>
+        </java>
+        <java classname="com.dan.brocken.tools.Tempo" fork="true" jvm="${platform.java}" dir="${basedir}" failonerror="true">
+            <jvmarg value="-Dstdout.encoding=UTF-8"/>
+            <jvmarg value="--enable-native-access=ALL-UNNAMED"/>
+            <jvmarg value="-Xmx3g"/>
+            <jvmarg value="-Dregie=TagimNebel"/>
+            <jvmarg value="-Dmarken=aus"/>
+            <jvmarg value="-Dpfeile=aus"/>
+            <jvmarg value="-Dfaeden=aus"/>
+            <arg line="20 1920 1080 - MITTEL 9 2026-10-21"/>
+            <classpath><pathelement path="${run.classpath}"/></classpath>
+        </java>
+        <java classname="com.dan.brocken.tools.Tempo" fork="true" jvm="${platform.java}" dir="${basedir}" failonerror="true">
+            <jvmarg value="-Dstdout.encoding=UTF-8"/>
+            <jvmarg value="--enable-native-access=ALL-UNNAMED"/>
+            <jvmarg value="-Xmx3g"/>
+            <jvmarg value="-Dregie=Walpurgis"/>
+            <jvmarg value="-Dmarken=aus"/>
+            <jvmarg value="-Dpfeile=aus"/>
+            <jvmarg value="-Dfaeden=aus"/>
+            <arg line="20 1920 1080 - MITTEL 9 2026-10-21"/>
+            <classpath><pathelement path="${run.classpath}"/></classpath>
+        </java>
+    </target>
+    <!-- Phase 10: Raten und Fahnen ohne Grafikkarte (com.dan.rime.demo.RimeDemo) nach docs/status/Raueis_Phase10.png. -->
+    <target name="raueis" depends="compile" description="Phase 10: com.dan.rime.demo.RimeDemo schreibt docs/status/Raueis_Phase10.png (Fahnen nach 8 h Raueislage, Raten in mm/h nach Durchmesser und Wind).">
+        <property name="platform.java" value="java"/>
+        <java classname="com.dan.rime.demo.RimeDemo" fork="true" jvm="${platform.java}" dir="${basedir}" failonerror="true">
+            <jvmarg value="-Dstdout.encoding=UTF-8"/>
+            <jvmarg value="-Djava.awt.headless=true"/>
+            <arg line="--bild docs/status/Raueis_Phase10.png 8"/>
+            <classpath><pathelement path="${run.classpath}"/></classpath>
+        </java>
+    </target>
+    <!-- Phase 7: Glorien, Nebelbogen und Halo-Winkel ohne Grafikkarte (com.dan.sky.demo.GloryDemo) nach docs/status/Glorie_Phase7.png. -->
+    <target name="glorie" depends="compile" description="Phase 7: com.dan.sky.demo.GloryDemo schreibt docs/status/Glorie_Phase7.png (Ringe nach der Tröpfchengröße, Nebelbogen, Halos).">
+        <property name="platform.java" value="java"/>
+        <java classname="com.dan.sky.demo.GloryDemo" fork="true" jvm="${platform.java}" dir="${basedir}" failonerror="true">
+            <jvmarg value="-Dstdout.encoding=UTF-8"/>
+            <jvmarg value="-Djava.awt.headless=true"/>
+            <arg line="--bild docs/status/Glorie_Phase7.png 1600"/>
+            <classpath><pathelement path="${run.classpath}"/></classpath>
+        </java>
+    </target>
+    <!-- Phase 8: Granit aus com.dan.cliff ohne App (com.dan.cliff.demo.CliffDemo, braucht die Grafikkarte): Granitwand,
+         Wollsäcke aus 30 m, Felsburg, Abend, Blockmeer, nach Regen; vergleicht Grafikkarte und Prozessor. -->
+    <target name="granit" depends="compile" description="Phase 8: com.dan.cliff.demo.CliffDemo --granit schreibt docs/status/Granit_Phase8.png (Wollsäcke, Felsburg, Blockmeer).">
+        <property name="platform.java" value="java"/>
+        <java classname="com.dan.cliff.demo.CliffDemo" fork="true" jvm="${platform.java}" dir="${basedir}" failonerror="true">
+            <jvmarg value="-Dstdout.encoding=UTF-8"/>
+            <jvmarg value="--enable-native-access=ALL-UNNAMED"/>
+            <arg line="--bild docs/status/Granit_Phase8.png 1800 --granit"/>
+            <classpath><pathelement path="${run.classpath}"/></classpath>
+        </java>
+    </target>
+    <!-- Phase 4: Windkarte ohne Grafikkarte: drei Lagen (Westlage, Ostwind am Tag, Nacht mit Inversion) auf dem echten
+         Gelände, Karte in 10 m über Grund, Pfeile, Rauchfäden, Orte und Schnitt nach docs/status/Wind_Phase4.png. -->
+    <target name="windkarte" depends="compile" description="Phase 4: tools.WindKarte rechnet drei Lagen und schreibt docs/status/Wind_Phase4.png.">
+        <property name="platform.java" value="java"/>
+        <java classname="com.dan.brocken.tools.WindKarte" fork="true" jvm="${platform.java}" dir="${basedir}" failonerror="true">
+            <jvmarg value="-Dstdout.encoding=UTF-8"/>
+            <jvmarg value="-Djava.awt.headless=true"/>
+            <jvmarg value="-Xmx4g"/>
+            <classpath><pathelement path="${run.classpath}"/></classpath>
+        </java>
+    </target>
+    <!-- Phase 3: Eichung des Klimas „Brocken“ (ohne Grafikkarte): gibt die Zeile EINGANG für wiring.KlimaBrocken aus. -->
+    <target name="klima" depends="compile" description="Eicht das Klima „Brocken“ gegen die Station (30 Jahre, drei Würfel) und zeigt Niederschlag und Nebeltage.">
+        <property name="platform.java" value="java"/>
+        <java classname="com.dan.brocken.tools.KlimaEichung" fork="true" jvm="${platform.java}" dir="${basedir}" failonerror="true">
+            <jvmarg value="-Dstdout.encoding=UTF-8"/>
+            <arg line="30 3 3"/>
+            <classpath><pathelement path="${run.classpath}"/></classpath>
+        </java>
+    </target>
+</project>

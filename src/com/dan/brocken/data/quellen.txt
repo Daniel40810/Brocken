@@ -1,0 +1,37 @@
+# Quellen der Szene Brocken (Werkbuch Abschnitt 14), für BR_QUELLE (Phase 17).
+# KURZ | ART (WEB, BUCH, ARTIKEL, DATEN, MESSUNG) | abgerufen (JJJJ-MM-TT) | Titel | URL | Bemerkung
+WP_BROCKEN | WEB | 2026-10-25 | Wikipedia: Brocken (Klima, Rekorde, Nebel, Schnee, Gipfel, Bauten, Moore, Geschichte) | https://de.wikipedia.org/wiki/Brocken | Bahnhof 1 125 m, Wolkenhäuschen 1736, Brockengarten 1890 mit 4 600 m², Gipfelstein und Brockenuhr
+WP_BRAILWAY | WEB | 2026-10-25 | Wikipedia: Brocken Railway (Strecke, Steigung, Spirale, Takt, Geschichte) | https://en.wikipedia.org/wiki/Brocken_Railway |
+WP_BROCKENBAHN | WEB | 2026-10-26 | Wikipedia: Brockenbahn (Länge Drei Annen Hohne–Brocken 18,9 km; Höhen der Bahnhöfe, Goetheweg 956 m) | https://de.wikipedia.org/wiki/Brockenbahn |
+WP_99_23 | WEB | 2026-10-26 | Wikipedia: DR Class 99.23-24 (Loks der Brockenbahn) | https://en.wikipedia.org/wiki/DR_Class_99.23-24 |
+WP_SENDER | WEB | 2026-10-26 | Wikipedia: Brocken Transmitter (alter Turm 53 m; Sendeturm 1973, Rohr seit 2007 bis 168 m) | https://en.wikipedia.org/wiki/Brocken_Transmitter |
+WP_TEUFELSKANZEL | WEB | 2026-10-26 | Wikipedia (de): Teufelskanzel (Brocken) (51° 47′ 51,7″ N, 10° 36′ 58,5″ O; der Hexenaltar gleich daneben) | https://de.wikipedia.org/wiki/Teufelskanzel_(Brocken) |
+ATLAS_OBSCURA | WEB | 2026-10-26 | Atlas Obscura: Teufelskanzel and Hexenaltar | https://www.atlasobscura.com/places/teufelskanzel-and-hexenaltar |
+LVERMGEO_OD | DATEN | 2026-10-25 | Geodatenportal Sachsen-Anhalt: Open Data (DGM1, DOP20, ALKIS), Lizenz dl-de/by-2-0 | https://www.lvermgeo.sachsen-anhalt.de/de/gdp-open-data.html | © GeoBasis-DE/LVermGeo ST (Daten verändert)
+DGM1_ST | DATEN | 2026-10-26 | DGM1 Sachsen-Anhalt, neun Kacheln um den Gipfel (templates/dgm1) | | © GeoBasis-DE/LVermGeo ST (Daten verändert), dl-de/by-2-0
+DGM1_NI | DATEN | 2026-10-25 | DGM1 Niedersachsen (OpenGeoData.NI) | https://ni-lgln-opengeodata.hub.arcgis.com/ | © LGLN (Daten verändert)
+GLO30 | DATEN | 2026-10-25 | Copernicus DEM GLO-30 über OpenTopography (templates/rasters_COP30) | https://opentopography.org/ | © DLR e.V. 2010–2014 und © Airbus Defence and Space GmbH 2014–2018, bereitgestellt unter COPERNICUS durch die EU und ESA
+DGM200 | DATEN | 2026-10-25 | BKG DGM200 (templates/dgm200.utm32s.gridascii.zip) | https://gdz.bkg.bund.de/ | © GeoBasis-DE / BKG 2026 (Daten verändert)
+ALKIS_HARZ | DATEN | 2026-10-25 | ALKIS tatsächliche Nutzung und Gebäude, Kreis Harz (templates/alkis_kreis_15085.gpkg) | | © GeoBasis-DE/LVermGeo ST, dl-de/by-2-0 (Daten verändert)
+NLP_HARZ | DATEN | 2026-10-25 | Nationalpark Harz, Teil Niedersachsen: Außengrenze (templates/Harz_Aussengrenze.zip) | | Datenlizenz Deutschland
+DWD_KLIMA | DATEN | 2026-10-25 | Klima der Station Brocken, Normalwerte 1991–2020 (DWD, NOAA) über Wikipedia: Brocken, Klimatabelle; Nebeltage 1895–2019 | https://de.wikipedia.org/wiki/Brocken |
+DWD_CDC_WIND | DATEN | 2026-10-25 | DWD Climate Data Center: Stundenwerte Wind, Station 722 Brocken (stundenwerte_FF_00722_19560101_20251231_hist.zip) | https://opendata.dwd.de/climate_environment/CDC/ | Geberhöhe 27 m
+FICHTELBERG | WEB | 2026-10-26 | Fichtelbergwetter (2019): Wetterwarte Brocken (Schneedeckentage, Rekorde) | | 178 Schneedeckentage 1961–1990, 380 cm am 14./15. April 1970
+LAU_A5 | WEB | 2026-10-26 | LAU Sachsen-Anhalt: Klimafolgenindikator A5 Schneedecke Harz (2025) | | Schierke: Tage mit mindestens 5 cm
+BAHNDAMPF | WEB | 2026-10-26 | bahndampf.de: Brockenbahn – Fahrplan, Fahrpreise, Bilder, Streckenverlauf (Sommer 2026, gültig ab 2. April 2026) | https://www.bahndampf.de/harzer-schmalspurbahnen/brockenbahn/fahrplan-fahrpreise-bilder-streckenverlauf | Stand 15.09.2026
+LUBITZ_WHITE | ARTIKEL | | Lubitz und White 2007: Wind-tunnel and field investigation of the effect of local wind direction on speed-up over hills | | Faustformel und Messungen
+WALMSLEY | ARTIKEL | | Walmsley, Taylor und Salmon 1989; Walmsley und Taylor 1996: Boundary-layer flow over topography | | ΔS = B · H/L · e^(−A z/L)
+SHERMAN | ARTIKEL | | Sherman 1978 (MATHEW), WindNinja (Forthofer), Winstral und Marks 2002 (Sx) | | Verfahren nachgebaut, Texte nicht im Wortlaut gelesen
+LAVEN | ARTIKEL | | Laven 2005: Die Glorie (erster roter Ring ≈ 24° / r) | |
+BOHREN_HUFFMAN | BUCH | | Bohren und Huffman 1983: Absorption and Scattering of Light by Small Particles, Anhang A (BHMIE) | | Verfahren nachgebaut
+WYMAN | ARTIKEL | | Wyman, Sloan und Shirley 2013: Simple Analytic Approximations to the CIE XYZ Color Matching Functions; Hale und Querry 1973 | |
+SPEKTRUM_2023 | ARTIKEL | 2026-10-26 | Spektrum der Wissenschaft (2023): Nationalpark Harz – Wo die wilde Jugend wächst | | rund 90 % des ursprünglichen Fichtenbestands abgestorben
+MAKKONEN | ARTIKEL | | Makkonen 2000: Models for the growth of rime, glaze, icicles and wet snow on structures (mit Finstad 1988, Macklin 1962) | | nach Sekundärquellen
+WINSTRAL | ARTIKEL | | Winstral, Elder und Davis 2002: Spatial snow modeling of wind-redistributed snow using terrain-based parameters | |
+ROECKL | BUCH | | Röckl: Bogenwiderstand für Schmalspur 400 / (R − 20) ‰ | | aus dem Gedächtnis
+ZHANG_SUEN | ARTIKEL | | Zhang und Suen 1984: A fast parallel algorithm for thinning digital patterns | | Verdünnen der Trassenflächen
+EVANGELISCH_2026 | WEB | 2026-10-26 | evangelisch.de: In der Walpurgisnacht regieren Hexen und Teufel (30.04.2026) | https://www.evangelisch.de/inhalte/242317/30-04-2026/der-walpurgisnacht-regieren-hexen-und-teufel |
+EVANGELISCH_2023 | WEB | 2026-10-26 | evangelisch.de: Flammende Teufelsrede und Hexenmodenschau (Walpurgisfeiern im Harz, 2023) | https://www.evangelisch.de/inhalte/215277/30-04-2023/walpurgisfeiern-im-harz-flammende-teufelsrede-und-hexenmodenschau |
+BIRDINGPLACES | WEB | 2026-10-26 | birdingplaces.eu: Brocken mountain (Ringdrossel, Wiesenpieper, Fichtenkreuzschnabel, Raufußkauz) | https://birdingplaces.eu/birdingplaces/germany/brocken-mountain |
+GOETHE_FAUST | BUCH | | Johann Wolfgang von Goethe: Faust. Der Tragödie erster Teil (1808), Walpurgisnacht, Chor der Hexen | |
+APP | MESSUNG | 2026-10-26 | Die Szene selbst: gerechnet oder gestaltet in Brocken (Werkbuch) | | [G]

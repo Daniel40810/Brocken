@@ -1,0 +1,23 @@
+# Befunde der Szene Brocken für BR_BEFUND (Phase 17): THEMA | Gegenstand | BELEGT, GEMESSEN oder GESTALTET | Text | Quellen (KURZ, durch Komma)
+GELAENDE | Kern DGM1 | BELEGT | Kern 3 × 3 km um den Gipfel aus neun Kacheln DGM1 Sachsen-Anhalt, auf 2 m verdichtet; Gipfelstein 1 140,7 m | DGM1_ST, LVERMGEO_OD
+GELAENDE | Hauptraster GLO-30 | GEMESSEN | GLO-30 mit 1″, umprojiziert nach UTM 32N auf 12,5 m; der Waldaufschlag gegen DGM200 abgezogen (rund 8,9 m) | GLO30, DGM200
+GELAENDE | Fernring DGM200 | BELEGT | DGM200 bis rund 100 km um den Gipfel, mit Erdkrümmung | DGM200
+GELAENDE | Nutzung aus ALKIS | BELEGT | Wald, Wiese, Wasser, Wege und Bahn aus der tatsächlichen Nutzung; Niedersachsen ohne ALKIS („ohne Angabe“, dort Fichtenwald [G]) | ALKIS_HARZ
+WETTER | Klima der Wetterwarte | BELEGT | Monatsmittel 1991–2020 (Jahr 3,9 °C, 1 799 mm), die Szene trifft sie im Mittel auf 0,1 K | DWD_KLIMA
+WETTER | Lagen und Übergänge | GESTALTET | Dreizehn Lagen am Gipfel mit Zielwerten, Schichtung und Verweildauer [G], so geeicht, dass das Klima stimmt | DWD_KLIMA, APP
+WIND | Wind der Station | GEMESSEN | Monatsmittel, Streuung und Richtungen aus den Stundenwerten der Station 722 (Geber in 27 m) | DWD_CDC_WIND
+WIND | Windfeld | GESTALTET | Massenkonsistent auf einem geländefolgenden Gitter 254 × 238 × 30 zu 50 m (wie MATHEW und WindNinja), Schichtung nach der Lage | SHERMAN, WALMSLEY, LUBITZ_WHITE
+NEBEL | Nebel im Jahr | BELEGT | Rund 300 Nebeltage im Jahr (1895–2019 im Mittel 306,6) | DWD_KLIMA
+NEBEL | Nebelmeer | GESTALTET | Hochnebel unter einer Inversion 450–850 m, Talnebel aus Kaltluftseen; Auflösung von unten nach der Sonne [G] | APP
+LICHT | Glorie und Brockengespenst | GEMESSEN | Mie-Streuung der Tröpfchen (BHMIE), erster roter Ring ≈ 24° / r; der Schatten des Wanderers im Gegenpunkt | LAVEN, BOHREN_HUFFMAN, WYMAN
+FELS | Teufelskanzel und Hexenaltar | BELEGT | Lage nach Wikipedia, der Hexenaltar gleich daneben; Höhen und Breiten nach Fotos [G] | WP_TEUFELSKANZEL, ATLAS_OBSCURA
+FELS | Moore | GESTALTET | Goethemoor und Brockenfeld: Lage und Ausdehnung aus Karte und Wanderbeschreibungen geschätzt [G] | APP
+WALD | Toter Fichtenwald | BELEGT | Rund 90 % des ursprünglichen Fichtenbestands abgestorben (Borkenkäfer seit 2018), Verjüngung mit Birke und Eberesche | SPEKTRUM_2023
+RAUEIS | Raueis | GEMESSEN | Wachstum nach Makkonen (dM/dt = α1·α2·α3·w·v·A), Dichte nach Macklin; Fahnen gegen den Wind | MAKKONEN
+JAHR | Schnee | GEMESSEN | Im Mittel rund 160 Tage Schnee am Gipfel (1961–1990: 178), Schierke rund 60 Tage mit 5 cm | FICHTELBERG, LAU_A5, WINSTRAL
+BAHN | Strecke | BELEGT | Trasse aus ALKIS (Bahnverkehr), größte Steigung 33 ‰, die Spirale 1,42-mal um den Gipfel | ALKIS_HARZ, WP_BROCKENBAHN, WP_BRAILWAY
+BAHN | Fahrplan | BELEGT | Sommer 2026: acht Bergfahrten, sechs Talfahrten; in der Szene an jedem Tag [G] | BAHNDAMPF
+BAHN | Lok | BELEGT | Lok der Baureihe 99.23–24 mit Wagen, Fahrdynamik nach Röckl | WP_99_23, ROECKL
+GIPFEL | Bauten | BELEGT | Grundrisse aus ALKIS, Höhen nach Fotos [G]; Sendeturm 168 m, alter Fernsehturm mit Radom | ALKIS_HARZ, WP_BROCKEN, WP_SENDER
+KLANG | Vögel am Gipfel | BELEGT | Ringdrossel und Wiesenpieper am Gipfel, Fichtenkreuzschnabel im Bergwald | BIRDINGPLACES
+REGIE | Walpurgisnacht | BELEGT | Die Nacht vom 30. April auf den 1. Mai mit der Sage vom Hexenzug auf den Brocken | GOETHE_FAUST, EVANGELISCH_2026, EVANGELISCH_2023

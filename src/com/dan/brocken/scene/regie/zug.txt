@@ -1,0 +1,37 @@
+# Brocken · Regiebuch (Phase 16). Eine Zeile je Stichwort: Zeit (Minuten:Sekunden echte Zeit), Befehl, Argumente, nach
+# „ | “ der Text fürs HUD und die Untertitel im Kino. Mehrere Befehle zur selben Zeit ohne Text sind ein Stichwort.
+# Befehle: zeit, raffer, wetter, lage, ansicht, kamera, fahrt, mitfahren, blick, sonne, treiben, meer, raueis, walpurgis,
+# warte, foto, blatt, sage. „warte uhr|abfahrt|ankunft|meer“ hält die Uhr des Regiebuchs an, bis die Szene so weit ist.
+# Gestaltet [G]. Der Zug ist die Bergfahrt 10:06 ab Schierke nach dem Fahrplan Sommer 2026 (an 10:39).
+Regiebuch: Mit dem Zug auf den Brocken
+Beschreibung: 12. Juni 2026, Westlage: die Bergfahrt 10:06 ab Schierke, auf der Lok durch den Wald, die Spirale um die Kuppe, oben die Wolke – Ankunft im Nebel
+Länge: 6:10
+Wetter: 06:00 | 1
+Schritt: 2 | AUFZIEHEND | Von Westen zieht feuchte Luft heran | WIND=8 DIRECTION=255 COVER=6 VISIBILITY=30 TEMPERATURE=11 HUMIDITY=85 | Schierke
+Schritt: 8 | STAU | Die Kappe sitzt auf dem Berg, im Tal ist es trocken | WIND=11 DIRECTION=265 COVER=8 VISIBILITY=15 TEMPERATURE=9 HUMIDITY=98 | Gipfelstein
+0:00 zeit 12.06.2026 10:03 | 10:03: Bahnhof Schierke, der Zug zum Brocken steht am Bahnsteig
+0:00 wetter
+0:00 raffer 1
+0:00 ansicht Schierke
+0:12 foto Schierke: der Zug zum Brocken
+0:20 raffer 6 | Die letzten Fahrgäste steigen ein
+0:40 warte abfahrt
+0:40 raffer 1 | 10:06: ein Pfiff, die Lok zieht an
+0:40 mitfahren -25
+1:00 foto Auf der Lok: Abfahrt in Schierke
+1:10 raffer 10 | Auf 33 ‰ durch den Fichtenwald, die meisten Fichten sind tot
+1:40 blick 70 | Der Blick hinab ins Tal
+2:05 foto Auf der Lok: der tote Wald am Hang
+2:20 blick -20 | Am Goetheweg, auf 955 m, wird der Wald licht
+2:50 raffer 8
+2:50 fahrt Spirale | Die Bahn umrundet die Kuppe anderthalbmal, so gewinnt sie Höhe
+3:25 foto Die Spirale um die Kuppe
+3:40 mitfahren 0 | Oben zieht die Wolke über den Berg
+4:10 foto Auf der Lok: in die Wolke
+4:20 warte ankunft
+4:20 raffer 1 | 10:39: Ankunft am Brocken, 1 125 m, im Nebel
+4:20 ansicht Bahnsteig
+4:40 foto Bahnsteig: Ankunft im Nebel
+5:10 ansicht Gipfelstein | Zum Gipfelstein sind es zehn Minuten zu Fuß
+5:30 foto Gipfelstein im Nebel
+6:00 blatt Mit dem Zug auf den Brocken

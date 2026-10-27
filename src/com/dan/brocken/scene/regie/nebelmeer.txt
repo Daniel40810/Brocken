@@ -1,0 +1,32 @@
+# Brocken · Regiebuch (Phase 16), Format wie in zug.txt. Gestaltet [G]. Sonnenaufgang am 21.10.2026 um 7:52, das
+# Wetter-Regiebuch „Über dem Nebelmeer“ des Klimas beginnt um 6:30.
+Regiebuch: Über dem Nebelmeer
+Beschreibung: 21. Oktober 2026: Sonnenaufgang über dem Nebelmeer, das Brockengespenst im Gegenpunkt, die Sonne löst das Meer zum Mittag auf
+Länge: 6:00
+0:00 zeit 21.10.2026 06:30 | 6:30: vor Sonnenaufgang, unter dem Gipfel liegt das Nebelmeer
+0:00 wetter Über dem Nebelmeer
+0:00 raffer 40
+0:00 ansicht Über dem Nebelmeer
+0:20 foto Über dem Nebelmeer: die Dämmerung
+0:30 ansicht Gipfelstein | Am Gipfelstein: die ersten Wanderer warten auf die Sonne
+1:00 foto Gipfelstein in der Dämmerung
+1:10 sonne hin -6 | Im Osten wird es hell
+1:20 warte uhr 07:50
+1:20 raffer 2 | 7:52: die Sonne geht über dem Meer auf
+2:00 foto Sonnenaufgang über dem Nebelmeer
+2:10 ansicht Über dem Nebelmeer | Die Kuppen des Harzes ragen aus dem Meer
+2:35 foto Über dem Nebelmeer im ersten Licht
+2:45 raffer 20
+2:45 ansicht Gipfelstein
+2:46 meer -400 3
+2:45 sonne gegenpunkt 3 | Mit der Sonne im Rücken: das Brockengespenst im Nebel, mit der Glorie um den Kopf
+3:10 foto Das Brockengespenst im Gegenpunkt
+3:30 meer regie
+3:30 raffer 240
+3:30 ansicht Vogelauge | Die Sonne löst das Meer von unten auf
+4:00 foto Vogelauge: das Meer reißt in den Tälern auf
+4:30 warte uhr 12:00
+4:30 raffer 1
+4:30 ansicht Gipfelstein | 12 Uhr: ein klarer Herbsttag
+5:00 foto Gipfelstein am Mittag
+5:40 blatt Über dem Nebelmeer
